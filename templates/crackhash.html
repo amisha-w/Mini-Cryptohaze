@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>CryptoHaze</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/style.css" rel="stylesheet" />
+</head>
+<script>
+    hideList = function() {
+        document.getElementById("worddiv").style.display = 'none';
+    };
+    showList = function() {
+        document.getElementById("worddiv").style.display = 'inline-block';
+    };
+</script>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="background: #25252b !important">
+        <div class="container">
+            <a class="navbar-brand" href="/"><img class="icon" src="static/icons/lock.svg" />&nbsp;CryptoHaze</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home
+								<span class="sr-only">(current)</span>
+							</a>
+                    </li>
+                    {% if not logged_in %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                    <li class="nav-item " style=" margin-left:30px;">
+                        <span class="navbar-text text-white">
+							{{ username }}
+						</span>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <br /><br />
+        <div class="card" style="background-color: #25252b; width: 100%; height: 100%; padding: 50px; border-radius: 10px;">
+
+            <form action="/crackhash" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="hashvalue">Enter Hash</label>
+                    <input type="text " class="form-control" name="hashvalue" id="hashvalue" placeholder="Enter Hash " />
+                    <br><label for="options">Select a wordlist:</label><br>
+                    <input type="radio" name="options" id="option1" value="default" onclick="hideList()" checked> Use default</input><br>
+                    <input type="radio" name="options" id="option2" value="custom" onclick="showList()"> Use custom</input><br><br>
+                    <div id="worddiv" style="display: none;">
+                        <label for="wordlist">Choose wordlist</label>
+                        <input name="wordlist" type="file" accept=".txt" class="form-control-file" id="wordlist" placeholder="Upload Worlist" />
+                    </div>
+                </div>
+                <br />
+                <button type="submit " class="btn btn-primary">
+					Crack Hash
+				</button>
+            </form>
+            <br>
+            {% if (value != "") %}
+            <div class="form-group">
+                <h5>Time to crack: {{ time }} seconds</h5>
+                <h3 id="hashtype">Hash Type is: {{ hashtype }}</h3>
+                <h3 id="hashvalue">Cracked Hash is: {{ value }}</h3>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    <!-- /.container -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="static/jquery/jquery.min.js "></script>
+    <script src="static/bootstrap/js/bootstrap.bundle.min.js "></script>
+</body>
+
+</html>

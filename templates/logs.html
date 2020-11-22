@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+
+		<title>CryptoHaze</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+		<!-- Custom styles for this template -->
+		<link href="static/css/style.css" rel="stylesheet" />
+	</head>
+
+	<body>
+		<!-- Navigation -->
+		<nav
+			class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+			style="background: #25252b !important"
+		>
+			<div class="container">
+				<a class="navbar-brand" href="/"
+					><img
+						class="icon"
+						src="static/icons/lock.svg"
+					/>&nbsp;CryptoHaze</a
+				>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-toggle="collapse"
+					data-target="#navbarResponsive"
+					aria-controls="navbarResponsive"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="/"
+								>Home
+								<span class="sr-only">(current)</span>
+							</a>
+						</li>
+						{% if not logged_in %}
+						<li class="nav-item">
+							<a class="nav-link" href="/register">Register</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/login">Login</a>
+						</li>
+						{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="/logout">Logout</a>
+						</li>
+						<li class="nav-item" style="margin-left: 30px">
+							<span class="navbar-text text-white">
+								{{ username }}
+							</span>
+						</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Page Content -->
+		<div class="container">
+			{% if logged_in %}
+			<br /><br />
+			<div class="row">
+				<div class="col-md-6">
+					<h3>{{ username }}'s Logs</h3>
+					<p>
+						The Logs are generated for all the features on this
+						website, and can be used by the user to track actions,
+						activities and view a summary of operations and usage
+						patterns for further inference and analysis.
+					</p>
+					<a class="btn btn-primary" href="/downloadlogs" download
+						>Download Logs</a
+					>
+				</div>
+				<div class="col-md-6">
+					<table
+						class="table table-bordered table-dark"
+						style="float: right"
+					>
+						<thead>
+							<tr>
+								<th scope="col">Code</th>
+								<th scope="col">Action</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>CH</td>
+								<td>Crack Hash</td>
+							</tr>
+							<tr>
+								<td>CF</td>
+								<td>Crack File</td>
+							</tr>
+							<tr>
+								<td>CD</td>
+								<td>Crack Dir</td>
+							</tr>
+							<tr>
+								<td>CC</td>
+								<td>Concurrent Crack</td>
+							</tr>
+							<tr>
+								<td>EF</td>
+								<td>Encrypt File</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<br />
+			<table class="table table-hover table-dark">
+				<thead>
+					<tr>
+						<th scope="col">Date</th>
+						<th scope="col">Time</th>
+						<th scope="col">Action</th>
+						<th scope="col">File</th>
+						<th scope="col" class="limit">Hash</th>
+						<th scope="col">Type</th>
+						<th scope="col">Value</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for row in table %}
+					<tr>
+						{% for column in row %} {% if loop.index == 5 %}
+						<td class="limit">{{ column }}</td>
+						{% else %}
+						<td>{{ column }}</td>
+						{% endif %} {% endfor %}
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+			{% else %}
+			<h2>Please Login to view Logs</h2>
+			{% endif %}
+		</div>
+		<!-- /.container -->
+
+		<!-- Bootstrap core JavaScript -->
+		<script src="static/jquery/jquery.min.js "></script>
+		<script src="static/bootstrap/js/bootstrap.bundle.min.js "></script>
+	</body>
+</html>

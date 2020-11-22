@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no"
+		/>
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+
+		<title>CryptoHaze</title>
+
+		<!-- Bootstrap core CSS -->
+		<link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+		<!-- Custom styles for this template -->
+		<link href="static/css/style.css" rel="stylesheet" />
+	</head>
+	<script>
+		smoothscroll = function () {
+			$("#features").css("visibility", "visible");
+
+			$("html,body").animate(
+				{
+					scrollTop: $("#features").offset().top,
+				},
+				"slow"
+			);
+		};
+	</script>
+
+	<body>
+		<!-- Navigation -->
+		<nav
+			class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+			style="background: #25252b !important"
+		>
+			<div class="container">
+				<a class="navbar-brand" href="/"
+					><img
+						class="icon"
+						src="static/icons/lock.svg"
+					/>&nbsp;CryptoHaze</a
+				>
+				<button
+					class="navbar-toggler"
+					type="button"
+					data-toggle="collapse"
+					data-target="#navbarResponsive"
+					aria-controls="navbarResponsive"
+					aria-expanded="false"
+					aria-label="Toggle navigation"
+				>
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarResponsive">
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item active">
+							<a class="nav-link" href="/"
+								>Home
+								<span class="sr-only">(current)</span>
+							</a>
+						</li>
+						{% if not logged_in %}
+						<li class="nav-item">
+							<a class="nav-link" href="/register">Register</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/login">Login</a>
+						</li>
+						{% else %}
+						<li class="nav-item">
+							<a class="nav-link" href="/logout">Logout</a>
+						</li>
+						<li class="nav-item" style="margin-left: 30px">
+							<span class="navbar-text text-white">
+								{{ username }}
+							</span>
+						</li>
+						{% endif %}
+					</ul>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Page Content -->
+		<div class="container">
+			<br /><br />
+
+			<div class="row">
+				<div class="col-lg-6">
+					<img src="static/icons/sec.svg" />
+				</div>
+				<div class="col-lg-6 text-white">
+					<div class="bg-dark">
+						<div class="container">
+							<!-- <h1 class="display-4">Cryptohaze</h1> -->
+							<ul class="list-group-flush">
+								<li
+									class="list-group-item d-flex justify-content-left align-items-center blackify"
+								>
+									<span class="badge badge-primary badge-pill"
+										>&#x2713;</span
+									>
+									&nbsp; &nbsp; Identify & Crack Hash
+								</li>
+								<li
+									class="list-group-item d-flex justify-content-left align-items-center blackify"
+								>
+									<span class="badge badge-primary badge-pill"
+										>&#x2713;</span
+									>
+									&nbsp; &nbsp; Crack from File
+								</li>
+								<li
+									class="list-group-item d-flex justify-content-left align-items-center blackify"
+								>
+									<span class="badge badge-primary badge-pill"
+										>&#x2713;</span
+									>
+									&nbsp; &nbsp; Crack from Directory
+								</li>
+								<li
+									class="list-group-item d-flex justify-content-left align-items-center blackify"
+								>
+									<span class="badge badge-primary badge-pill"
+										>&#x2713;</span
+									>
+									&nbsp; &nbsp; Concurrently Crack Hashes
+								</li>
+								<li
+									class="list-group-item d-flex justify-content-left align-items-center blackify"
+								>
+									<span class="badge badge-primary badge-pill"
+										>&#x2713;</span
+									>
+									&nbsp; &nbsp; Crack using Custom WordList
+								</li>
+								<li
+									class="list-group-item d-flex justify-content-left align-items-center blackify"
+								>
+									<span class="badge badge-primary badge-pill"
+										>&#x2713;</span
+									>
+									&nbsp; &nbsp; Password Strength Checker
+								</li>
+								<li
+									class="list-group-item d-flex justify-content-left align-items-center blackify"
+								>
+									<span class="badge badge-primary badge-pill"
+										>&#x2713;</span
+									>
+									&nbsp; &nbsp; Encrypt from File
+								</li>
+								<li
+									class="list-group-item d-flex justify-content-left align-items-center blackify"
+								>
+									<span class="badge badge-primary badge-pill"
+										>&#x2713;</span
+									>
+									&nbsp; &nbsp; View & Download Logs
+								</li>
+							</ul>
+							<div class="row">
+								<div class="col-md-4"></div>
+								<div class="col-md-4">
+									<button
+										id="explorebtn"
+										class="btn btn-primary"
+										onclick="smoothscroll()"
+									>
+										Explore
+									</button>
+								</div>
+								<div class="col-md-4"></div>
+							</div>
+							<br />
+						</div>
+					</div>
+				</div>
+			</div>
+			<br /><br />
+			<br />
+			<div id="features" class="row">
+				<div class="card-columns">
+					<!-- <div class="card mx-auto">
+                    <div class="card-body text-center">
+                        <img class="w-25 h-25" src="static/icons/verify.svg" />
+                        <br /><br />
+                        <a href="/identifyhash" class="btn btn-primary">Identify Hash</a
+							>
+						</div>
+					</div> -->
+					<div class="card mx-auto">
+						<div class="card-body text-center">
+							<img
+								class="w-25 h-25"
+								src="static/icons/crack.svg"
+							/>
+							<br /><br />
+							<a href="/crackhash" class="btn btn-primary"
+								>Crack Hashes</a
+							>
+						</div>
+					</div>
+					<div class="card mx-auto">
+						<div class="card-body text-center">
+							<img
+								class="w-25 h-25"
+								src="static/icons/file.svg"
+							/>
+							<br /><br />
+							<a href="/crackhashfromfile" class="btn btn-primary"
+								>Crack Hash from File</a
+							>
+						</div>
+					</div>
+					<div class="card mx-auto">
+						<div class="card-body text-center">
+							<img class="w-25 h-25" src="static/icons/dir.svg" />
+							<br /><br />
+							<a href="/crackhashfromdir" class="btn btn-primary"
+								>Crack Hash from Directory</a
+							>
+						</div>
+					</div>
+					<div class="card mx-auto">
+						<div class="card-body text-center">
+							<img
+								class="w-25 h-25"
+								src="static/icons/conc.svg"
+							/>
+							<br /><br />
+							<a href="/concurrentthread" class="btn btn-primary"
+								>Concurrently break Hashes</a
+							>
+						</div>
+					</div>
+					<div class="card mx-auto">
+						<div class="card-body text-center">
+							<img
+								class="w-25 h-25"
+								src="static/icons/secure.svg"
+							/>
+							<br /><br />
+							<a href="/statistics" class="btn btn-primary"
+								>Statistics</a
+							>
+						</div>
+					</div>
+
+					<div class="card mx-auto">
+						<div class="card-body text-center">
+							<img class="w-25 h-25" src="static/icons/key.svg" />
+							<br /><br />
+							<a href="/encrypt" class="btn btn-primary"
+								>Encrypt file</a
+							>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br /><br />
+		<!-- /.container -->
+
+		<!-- Bootstrap core JavaScript -->
+		<script src="static/jquery/jquery.min.js"></script>
+		<script src="static/bootstrap/js/bootstrap.bundle.min.js"></script>
+	</body>
+</html>

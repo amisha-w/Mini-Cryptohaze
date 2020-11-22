@@ -1,0 +1,40 @@
+/*!
+ * Start Bootstrap - Heroic Features (https://startbootstrap.com/templates/heroic-features)
+ * Copyright 2013-2020 Start Bootstrap
+ * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-heroic-features/blob/master/LICENSE)
+ */
+
+body {
+	padding-top: 56px;
+	background-color: #2c2c32 !important;
+	color: white;
+}
+
+.card {
+	background-color: #0b0f1a;
+	color: white !important;
+	border: none !important;
+}
+
+.icon {
+	height: 35px !important;
+	width: 35px !important;
+}
+
+.card-icon {
+	height: 50px;
+	width: 50px;
+}
+
+.limit {
+	max-width: 150px !important;
+	/* Customise it accordingly */
+	white-space: nowrap !important;
+	overflow: hidden !important;
+	word-wrap: break-word !important;
+	text-overflow: ellipsis !important;
+}
+
+.blackify {
+	background: transparent !important;
+}

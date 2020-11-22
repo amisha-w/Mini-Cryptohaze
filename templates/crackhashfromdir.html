@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+    <title>CryptoHaze</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="static/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="static/css/style.css" rel="stylesheet" />
+</head>
+<script>
+    function saveTextAsFile(textToWrite, fileNameToSaveAs) {
+        var textFileAsBlob = new Blob([textToWrite], {
+            type: 'text/plain'
+        });
+        var downloadLink = document.createElement("a");
+        downloadLink.download = fileNameToSaveAs;
+        downloadLink.innerHTML = "Download File";
+        if (window.webkitURL != null) {
+            // Chrome allows the link to be clicked
+            // without actually adding it to the DOM.
+            downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+        } else {
+            // Firefox requires the link to be added to the DOM
+            // before it can be clicked.
+            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+        }
+
+        downloadLink.click();
+    }
+    hideList = function() {
+        document.getElementById("worddiv").style.display = 'none';
+    };
+    showList = function() {
+        document.getElementById("worddiv").style.display = 'inline-block';
+    };
+</script>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="background: #25252b !important">
+        <div class="container">
+            <a class="navbar-brand" href="/"><img class="icon" src="static/icons/lock.svg" />&nbsp;CryptoHaze</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">Home
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    {% if not logged_in %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/login">Login</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+                    <li class="nav-item " style=" margin-left:30px;">
+                        <span class="navbar-text text-white">
+							{{ username }}
+						</span>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+        <br /><br />
+        <div class="card" style="background-color: #25252b; width: 100%; height: 100%; padding: 50px; border-radius: 10px;">
+
+            <form action="/crackhashfromdir" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="hashvalue">Select Directory</label>
+                    <input type="file" name="hashdir" id="hashdir" webkitdirectory mozdirectory msdirectory odirectory directory multiple>
+                    <br><label for="options">Select a wordlist:</label><br>
+                    <input type="radio" name="options" id="option1" value="default" onclick="hideList()" checked> Use default</input><br>
+                    <input type="radio" name="options" id="option2" value="custom" onclick="showList()"> Use custom</input><br><br>
+                    <div id="worddiv" style="display: none;">
+                        <label for="wordlist">Choose wordlist</label>
+                        <input name="wordlist" type="file" accept=".txt" class="form-control-file" id="wordlist" placeholder="Upload Worlist" />
+                    </div>
+                </div>
+                <br />
+                <button type="submit " class="btn btn-primary">
+                Crack Hashes from Directory
+            </button>
+            </form>
+            <br><br> {% if (download != "") %}
+            <div class="form-group">
+                <h6>Time to crack: {{ time }} seconds</h6>
+                <button class="btn btn-primary" onclick="saveTextAsFile(t.value,'crack.txt')">Download</button><br><br> {% for table in tables%}
+                <h6>Filename: {{ fnames[loop.index-1] }}</h6>
+                <table class="table table-hover table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col" class="limit">Hash Value</th>
+                            <th scope="col">Type</th>
+                            <th scope=" col ">Cracked Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in table %}
+                        <tr>
+                            <th scope="row ">{{ loop.index }}</th>
+                            {% for column in row %}
+                            <td class="limit">{{ column }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endfor %}
+            </div>
+        </div>
+        <textarea style="visibility: hidden; " id="t" name="t">{{ download }}</textarea> {% endif %}
+
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="static/jquery/jquery.min.js "></script>
+    <script src="static/bootstrap/js/bootstrap.bundle.min.js "></script>
+</body>
+
+</html>

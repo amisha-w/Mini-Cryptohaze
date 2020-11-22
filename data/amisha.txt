@@ -1,0 +1,9 @@
+34eace700b79730481c17bab7e2657e1:gayatri
+6b42d00c4ca6ddc33a604c54b8ce4adc:lion
+dabe0d16e465745eb3108c9598d07860 girish 
+testdir/abc.txt
+c3b29ce20ce560efdc6f6714612a1156 york 
+439ed537979d8e831561964dbbbd7413 rahul 
+testdir/testdirnew/xyz.txt
+34eace700b79730481c17bab7e2657e1 gayatri 
+dabe0d16e465745eb3108c9598d07860 girish
